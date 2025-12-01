@@ -1,0 +1,40 @@
+name: VikingBoard Docs CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          # Hvis vikingboard_docs.py senere får egne avhengigheter, legg dem her
+          # pip install -r requirements.txt
+
+      - name: Regenerate VikingBoard docs
+        run: |
+          python tools/vikingboard_docs.py
+
+      - name: Fail if docs changed
+        run: |
+          git status
+          if ! git diff --quiet; then
+            echo "❌ vikingboard_docs.py endret filer."
+            echo "   Kjør skriptet lokalt, commit og push oppdaterte docs."
+            exit 1
+          fi
+
