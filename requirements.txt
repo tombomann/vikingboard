@@ -1,0 +1,8 @@
+# VikingBoard automation dependencies (minimal)
+# Note: All used libraries are Python stdlib (dataclasses, pathlib, csv)
+# No external dependencies needed!
+
+# Future additions:
+# kicad-skip>=0.9.0     # For .kicad_sch parsing/generation
+# protobuf             # For KiCad 9 IPC API
+# nng                  # For IPC socket communication
