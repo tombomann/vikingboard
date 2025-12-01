@@ -1,0 +1,182 @@
+[
+  {
+    "ref": "U1",
+    "pad": "10",
+    "net": "SPI_SCK"
+  },
+  {
+    "ref": "U1",
+    "pad": "11",
+    "net": "SPI_MOSI"
+  },
+  {
+    "ref": "U1",
+    "pad": "12",
+    "net": "SPI_MISO"
+  },
+  {
+    "ref": "U1",
+    "pad": "13",
+    "net": "I2C_SCL"
+  },
+  {
+    "ref": "U1",
+    "pad": "14",
+    "net": "I2C_SDA"
+  },
+  {
+    "ref": "U1",
+    "pad": "21",
+    "net": "MCP_INT"
+  },
+  {
+    "ref": "U1",
+    "pad": "5V",
+    "net": "+5V_SYS"
+  },
+  {
+    "ref": "U1",
+    "pad": "GND",
+    "net": "GND"
+  },
+  {
+    "ref": "U1",
+    "pad": "EN",
+    "net": "EN"
+  },
+  {
+    "ref": "U1",
+    "pad": "43",
+    "net": "GPS_RX"
+  },
+  {
+    "ref": "U1",
+    "pad": "44",
+    "net": "GPS_TX"
+  },
+  {
+    "ref": "U2",
+    "pad": "10",
+    "net": "GND"
+  },
+  {
+    "ref": "U2",
+    "pad": "9",
+    "net": "+3V3_IO"
+  },
+  {
+    "ref": "U2",
+    "pad": "12",
+    "net": "I2C_SCL"
+  },
+  {
+    "ref": "U2",
+    "pad": "13",
+    "net": "I2C_SDA"
+  },
+  {
+    "ref": "U2",
+    "pad": "20",
+    "net": "MCP_INT"
+  },
+  {
+    "ref": "U2",
+    "pad": "18",
+    "net": "EN"
+  },
+  {
+    "ref": "U2",
+    "pad": "15",
+    "net": "GND"
+  },
+  {
+    "ref": "U2",
+    "pad": "16",
+    "net": "GND"
+  },
+  {
+    "ref": "U2",
+    "pad": "17",
+    "net": "GND"
+  },
+  {
+    "ref": "U2",
+    "pad": "21",
+    "net": "LORA_CS"
+  },
+  {
+    "ref": "U2",
+    "pad": "22",
+    "net": "LORA_BUSY"
+  },
+  {
+    "ref": "U2",
+    "pad": "23",
+    "net": "LORA_DIO1"
+  },
+  {
+    "ref": "U2",
+    "pad": "24",
+    "net": "GPS_PPS"
+  },
+  {
+    "ref": "U2",
+    "pad": "25",
+    "net": "CC1101_CS"
+  },
+  {
+    "ref": "U2",
+    "pad": "26",
+    "net": "CC1101_GDO0"
+  },
+  {
+    "ref": "U2",
+    "pad": "27",
+    "net": "NRF24_CS"
+  },
+  {
+    "ref": "U2",
+    "pad": "28",
+    "net": "NRF24_CE"
+  },
+  {
+    "ref": "U2",
+    "pad": "1",
+    "net": "NRF24_IRQ"
+  },
+  {
+    "ref": "U2",
+    "pad": "2",
+    "net": "KBD_RST"
+  },
+  {
+    "ref": "U2",
+    "pad": "3",
+    "net": "KBD_INT"
+  },
+  {
+    "ref": "U2",
+    "pad": "4",
+    "net": "FZ_GPIO1"
+  },
+  {
+    "ref": "U2",
+    "pad": "5",
+    "net": "FZ_GPIO2"
+  },
+  {
+    "ref": "U2",
+    "pad": "6",
+    "net": "FZ_GPIO3"
+  },
+  {
+    "ref": "U2",
+    "pad": "7",
+    "net": "FZ_GPIO4"
+  },
+  {
+    "ref": "U2",
+    "pad": "8",
+    "net": "FZ_GPIO5"
+  }
+]
