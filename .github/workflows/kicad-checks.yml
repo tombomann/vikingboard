@@ -1,0 +1,81 @@
+name: KiCad ERC/DRC Checks
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+    paths:
+      - 'kicad/**'
+      - '.github/workflows/kicad-checks.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'kicad/**'
+
+jobs:
+  kicad-checks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install KiCad
+      run: |
+        sudo add-apt-repository --yes ppa:kicad/kicad-8.0-releases
+        sudo apt update
+        sudo apt install -y kicad kicad-libraries
+    
+    - name: Verify KiCad installation
+      run: |
+        kicad-cli version
+    
+    - name: Run ERC (Electrical Rule Check)
+      id: erc
+      continue-on-error: true
+      run: |
+        kicad-cli sch erc \
+          --output kicad/erc_report.txt \
+          --exit-code-violations \
+          kicad/Vikingboard.kicad_sch
+    
+    - name: Run DRC (Design Rule Check)
+      id: drc
+      continue-on-error: true
+      run: |
+        kicad-cli pcb drc \
+          --output kicad/drc_report.txt \
+          --exit-code-violations \
+          kicad/Vikingboard.kicad_pcb
+    
+    - name: Upload ERC Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: erc-report
+        path: kicad/erc_report.txt
+    
+    - name: Upload DRC Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: drc-report
+        path: kicad/drc_report.txt
+    
+    - name: Check for violations
+      if: steps.erc.outcome == 'failure' || steps.drc.outcome == 'failure'
+      run: |
+        echo "::error::ERC or DRC checks failed. Review the reports for details."
+        if [ -f kicad/erc_report.txt ]; then
+          echo "ERC Report:"
+          cat kicad/erc_report.txt
+        fi
+        if [ -f kicad/drc_report.txt ]; then
+          echo "DRC Report:"
+          cat kicad/drc_report.txt
+        fi
+        exit 1
+    
+    - name: Success message
+      if: steps.erc.outcome == 'success' && steps.drc.outcome == 'success'
+      run: |
+        echo "✅ All ERC and DRC checks passed!"
