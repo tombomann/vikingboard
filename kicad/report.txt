@@ -1,0 +1,10 @@
+Updated Conn_02x18_Odd_Even from J1 to J2.
+Updated Conn_01x05 from U7 to U1.
+Updated DRV2605LDGS from U8 to U2.
+Updated PAL24 from U6 to U3.
+Updated Q_Triac from U2 to U4.
+Updated SX1276 from U3 to U5.
+Updated Conn_02x04_Odd_Even_Shielded from U5 to U6.
+Updated Conn_01x08_Shielded from U4 to U7.
+Annotation complete.
+Annotation complete.
