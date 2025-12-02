@@ -1,0 +1,53 @@
+RefDes,Category,Description,Manufacturer,Part Number,Package,Qty,Unit Price (USD),Total Price (USD),Supplier,Supplier Part Number,Notes
+U1,MCU,ESP32 WiFi/BT Module,Espressif,ESP32-WROOM-32E,SMD Module,1,2.50,2.50,DigiKey,1965-ESP32-WROOM-32E-ND,Main microcontroller
+U2,RF,LoRa 868/915MHz Module,EBYTE,E22-900M30S,SMD Module,1,7.00,7.00,AliExpress,E22-900M30S,1W TX power
+U3,RF,CC1101 433MHz Module,Generic,CC1101 Module,Breakout,1,3.00,3.00,AliExpress,CC1101-Module,Sub-1GHz transceiver
+U4,RF,NRF24L01+ 2.4GHz Module,Nordic,NRF24L01+ Module,Breakout,1,2.00,2.00,AliExpress,NRF24L01Plus,2.4GHz transceiver
+U5,RF,GPS Module,u-blox,NEO-M8N,SMD Module,1,12.00,12.00,DigiKey,672-NEO-M8N-0-10-ND,GPS receiver
+U6,Sensor,IMU 6-axis,InvenSense,MPU-6050,QFN-24,1,3.00,3.00,DigiKey,1428-1008-1-ND,Accelerometer + Gyro
+U7,Sensor,Environment Sensor,Bosch,BME280,LGA-8,1,5.00,5.00,DigiKey,828-1063-1-ND,Temp + Humidity + Pressure
+U8,Sensor,Light Sensor,ROHM,BH1750FVI,SOP-6,1,1.50,1.50,LCSC,C78960,Ambient light sensor
+U9,Audio,MEMS Microphone I2S,Knowles,SPH0645LM4H,SMD-7,1,4.00,4.00,DigiKey,423-1133-1-ND,Digital I2S mic
+U10,Audio,Speaker Amplifier 3W I2S,Maxim,MAX98357AETE+,TQFN-16,1,3.50,3.50,DigiKey,MAX98357AETE+-ND,Class D amplifier
+U11,Haptic,Haptic Motor Driver,Texas Instruments,DRV2605LDGSR,VSSOP-10,1,3.00,3.00,DigiKey,296-38358-1-ND,I2C haptic controller
+U12,Power,USB-C PD Controller,Injoinic,IP2721,QFN-10,1,0.80,0.80,LCSC,C3701536,5V/3A PD negotiation
+U13,Power,3.3V LDO 1A (IO Rail),Advanced Monolithic,AMS1117-3.3,SOT-223,1,0.40,0.40,DigiKey,1232-1785-1-ND,Main 3.3V regulator
+U14,Power,3.3V LDO 300mA (RF Rail),Torex,XC6206P332MR,SOT-23-3,1,0.20,0.20,LCSC,C5446,Low-noise RF LDO
+U15,Power,USB-A Current Limiter 500mA,Texas Instruments,TPS2051BDBVR,SOT-23-5,1,0.60,0.60,DigiKey,296-18047-1-ND,USB-A host protection
+U16,Protection,USB ESD Protection,STMicroelectronics,USBLC6-2SC6,SOT-23-6,2,0.30,0.60,DigiKey,497-5235-1-ND,USB-C and USB-A lines
+J1,Connector,USB-C Receptacle,GCT,USB4085-GF-A,SMD,1,1.20,1.20,DigiKey,2073-USB4085-GF-ACT-ND,USB 2.0 Type-C
+J2,Connector,USB-A Receptacle,Amphenol,UE27AC54100,SMD,1,0.80,0.80,DigiKey,UE27AC54100-ND,USB 2.0 Type-A host
+J3,Connector,microSD Card Socket,Molex,5033981892,SMD,1,1.50,1.50,DigiKey,WM9731CT-ND,microSD card slot
+J4,Connector,U.FL Antenna Connector (LoRa),Hirose,U.FL-R-SMT-1(10),SMD,1,0.50,0.50,DigiKey,H11891CT-ND,U.FL for LoRa antenna
+J5,Connector,U.FL Antenna Connector (CC1101),Hirose,U.FL-R-SMT-1(10),SMD,1,0.50,0.50,DigiKey,H11891CT-ND,U.FL for CC1101 antenna
+J6,Connector,U.FL Antenna Connector (NRF24),Hirose,U.FL-R-SMT-1(10),SMD,1,0.50,0.50,DigiKey,H11891CT-ND,U.FL for NRF24 antenna
+J7,Connector,U.FL Antenna Connector (GPS),Hirose,U.FL-R-SMT-1(10),SMD,1,0.50,0.50,DigiKey,H11891CT-ND,U.FL for GPS antenna
+J8,Connector,2x49 Pin Header (Male),Sullins,PRPC049DAAN-RC,Through-hole,1,4.00,4.00,DigiKey,S7100-ND,98-pin expansion header
+SW1,Switch,Tactile Button (BOOT),C&K,PTS645,SMD,1,0.30,0.30,DigiKey,CKN9112CT-ND,Boot mode button
+SW2,Switch,Tactile Button (RESET),C&K,PTS645,SMD,1,0.30,0.30,DigiKey,CKN9112CT-ND,Reset button
+D1,LED,Status LED Green,Lite-On,LTST-C150GKT,0805,1,0.10,0.10,DigiKey,160-1178-1-ND,User status LED
+D2,LED,Power LED Red,Lite-On,LTST-C150CKT,0805,1,0.10,0.10,DigiKey,160-1176-1-ND,Power indicator LED
+D3,LED,IR LED 940nm,Vishay,TSAL6200,5mm,1,0.50,0.50,DigiKey,TSAL6200-ND,IR transmitter
+D4,Diode,IR Receiver 38kHz,Vishay,TSOP38238,SMD,1,0.80,0.80,DigiKey,TSOP38238-ND,IR receiver
+F1,Fuse,Polyfuse 3A,Littelfuse,0ZCJ0050FF2G,1206,1,0.40,0.40,DigiKey,F5802CT-ND,USB-C overcurrent protection
+L1,Inductor,Ferrite Bead 600R@100MHz,Murata,BLM18PG601SN1D,0603,2,0.10,0.20,DigiKey,490-1054-1-ND,Power filtering
+C1-C10,Capacitor,Capacitor 10uF 16V X5R,Samsung,CL21A106KAYNNNE,0805,10,0.10,1.00,DigiKey,1276-1052-1-ND,Power decoupling
+C11-C30,Capacitor,Capacitor 100nF 50V X7R,Samsung,CL21B104KBCNNNC,0805,20,0.05,1.00,DigiKey,1276-1003-1-ND,Bypass caps
+C31-C35,Capacitor,Capacitor 1uF 50V X7R,Samsung,CL21B105KBFNNNE,0805,5,0.08,0.40,DigiKey,1276-1066-1-ND,Bulk decoupling
+C36,Capacitor,Capacitor 22uF 16V X5R,Samsung,CL21A226MAYNNNE,0805,1,0.15,0.15,DigiKey,1276-1119-1-ND,USB-C bulk cap
+R1-R10,Resistor,Resistor 10k 1% 1/8W,Yageo,RC0805FR-0710KL,0805,10,0.02,0.20,DigiKey,311-10.0KCRCT-ND,Pull-up/down resistors
+R11-R15,Resistor,Resistor 4.7k 1% 1/8W,Yageo,RC0805FR-074K7L,0805,5,0.02,0.10,DigiKey,311-4.70KCRCT-ND,I2C pull-ups
+R16-R18,Resistor,Resistor 1k 1% 1/8W,Yageo,RC0805FR-071KL,0805,3,0.02,0.06,DigiKey,311-1.00KCRCT-ND,LED current limiting
+R19-R20,Resistor,Resistor 5.1k 1% 1/8W,Yageo,RC0805FR-075K1L,0805,2,0.02,0.04,DigiKey,311-5.10KCRCT-ND,USB-C CC pull-down
+SP1,Speaker,Speaker 8Ω 3W,Generic,Speaker 28mm,Through-hole,1,2.00,2.00,AliExpress,Generic,8Ω speaker for audio
+M1,Motor,Haptic Motor ERM,Precision Microdrives,310-113,Coin vibration,1,3.00,3.00,DigiKey,1670-1014-ND,Haptic feedback motor
+ANT1,Antenna,LoRa Antenna 868/915MHz,Generic,868MHz 3dBi,SMA/U.FL,1,5.00,5.00,AliExpress,Generic,External LoRa antenna
+ANT2,Antenna,433MHz Antenna,Generic,433MHz 3dBi,SMA/U.FL,1,3.00,3.00,AliExpress,Generic,External CC1101 antenna
+ANT3,Antenna,2.4GHz Antenna,Generic,2.4GHz 2dBi,SMA/U.FL,1,2.00,2.00,AliExpress,Generic,External NRF24 antenna
+ANT4,Antenna,GPS Active Antenna,Generic,GPS 28dB gain,SMA/U.FL,1,8.00,8.00,AliExpress,Generic,External GPS active antenna
+,,,,,,,,,,
+,,,,,SUBTOTAL (Components),,,,88.69,
+,,,,,PCB Manufacturing (JLCPCB 4-layer 100x80mm 5pcs),,,,30.00,Estimated for 5 boards
+,,,,,Shipping & Handling,,,,15.00,Estimated
+,,,,,,,TOTAL ESTIMATED COST,,,133.69,Per board (1-off with shipping)
+,,,,,,,TOTAL (10 boards),,,,~110.00,Per board with volume discount
