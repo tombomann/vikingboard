@@ -47,7 +47,7 @@ class Pin:
     function: str
     pin_type: PinType
     voltage: str  # "3.3V", "5V", "GND"
-    max_current_ma: int
+    max_current_ma: int  # For power/ground pins only
     notes: str = ""
     esp32_gpio: Optional[str] = None  # ESP32 GPIO mapping if applicable
 
@@ -103,7 +103,7 @@ class VikingBoardSpec:
     - Module slots
     """
     
-    VERSION = "1.0.0"
+    VERSION = "1.0.1"
     BOARD_NAME = "VikingBoard"
     TOTAL_PINS = 98
     DATE = "2025-12-02"
@@ -246,6 +246,10 @@ class VikingBoardSpec:
     ]
     
     # ==================== PIN MAPPING (98 pins) ====================
+    # GPIO assignments carefully planned to avoid conflicts
+    # ESP32 has 34 usable GPIOs (GPIO0-GPIO39)
+    # Input-only: GPIO34-39 (ADC1)
+    # Strapping pins: GPIO0, GPIO2, GPIO5, GPIO12, GPIO15 (use with caution)
     
     pins = [
         # ========== POWER SECTION (Pins 1-14) ==========
@@ -265,105 +269,107 @@ class VikingBoardSpec:
         Pin(14, "GND", "Ground", PinType.GROUND, "GND", 0, "Ground distribution"),
         
         # ========== USB SECTION (Pins 15-22) ==========
-        Pin(15, "USB_C_DP", "USB-C D+ data", PinType.USB, "3.3V", 100, "USB 2.0 differential pair +"),
-        Pin(16, "USB_C_DN", "USB-C D- data", PinType.USB, "3.3V", 100, "USB 2.0 differential pair -"),
-        Pin(17, "USB_C_CC1", "USB-C CC1", PinType.USB, "3.3V", 10, "Configuration channel 1"),
-        Pin(18, "USB_C_CC2", "USB-C CC2", PinType.USB, "3.3V", 10, "Configuration channel 2"),
-        Pin(19, "USB_A_DP", "USB-A Host D+", PinType.USB, "3.3V", 100, "USB-A host data +", "GPIO19"),
-        Pin(20, "USB_A_DN", "USB-A Host D-", PinType.USB, "3.3V", 100, "USB-A host data -", "GPIO20"),
-        Pin(21, "USB_A_EN", "USB-A enable", PinType.CONTROL, "3.3V", 25, "Enable USB-A power", "GPIO21"),
+        Pin(15, "USB_C_DP", "USB-C D+ data", PinType.USB, "3.3V", 0, "USB 2.0 differential pair +"),
+        Pin(16, "USB_C_DN", "USB-C D- data", PinType.USB, "3.3V", 0, "USB 2.0 differential pair -"),
+        Pin(17, "USB_C_CC1", "USB-C CC1", PinType.USB, "3.3V", 0, "Configuration channel 1"),
+        Pin(18, "USB_C_CC2", "USB-C CC2", PinType.USB, "3.3V", 0, "Configuration channel 2"),
+        Pin(19, "USB_A_DP", "USB-A Host D+", PinType.USB, "3.3V", 0, "USB-A host data +", "GPIO19"),
+        Pin(20, "USB_A_DN", "USB-A Host D-", PinType.USB, "3.3V", 0, "USB-A host data -", "GPIO20"),
+        Pin(21, "USB_A_EN", "USB-A enable", PinType.CONTROL, "3.3V", 0, "Enable USB-A power", "GPIO21"),
         Pin(22, "GND", "Ground", PinType.GROUND, "GND", 0, "USB ground"),
         
         # ========== SPI BUS (Pins 23-32) ==========
-        Pin(23, "SPI_SCK", "SPI clock", PinType.SPI, "3.3V", 25, "Shared SPI bus", "GPIO18"),
-        Pin(24, "SPI_MOSI", "SPI MOSI", PinType.SPI, "3.3V", 25, "Master out slave in", "GPIO23"),
-        Pin(25, "SPI_MISO", "SPI MISO", PinType.SPI, "3.3V", 25, "Master in slave out", "GPIO19"),
-        Pin(26, "SPI_CS_CC1101", "CC1101 chip select", PinType.SPI, "3.3V", 25, "CC1101 CS active low", "GPIO5"),
-        Pin(27, "SPI_CS_NRF24", "NRF24 chip select", PinType.SPI, "3.3V", 25, "NRF24 CS active low", "GPIO15"),
-        Pin(28, "SPI_CS_LORA", "LoRa chip select", PinType.SPI, "3.3V", 25, "LoRa E22 CS (if SPI mode)", "GPIO13"),
-        Pin(29, "SPI_CS_SD", "SD card chip select", PinType.SPI, "3.3V", 25, "SD card CS active low", "GPIO14"),
-        Pin(30, "SD_CD", "SD card detect", PinType.GPIO, "3.3V", 25, "Card detect active low", "GPIO27"),
+        Pin(23, "SPI_SCK", "SPI clock", PinType.SPI, "3.3V", 0, "Shared SPI bus", "GPIO18"),
+        Pin(24, "SPI_MOSI", "SPI MOSI", PinType.SPI, "3.3V", 0, "Master out slave in", "GPIO23"),
+        Pin(25, "SPI_MISO", "SPI MISO", PinType.SPI, "3.3V", 0, "Master in slave out", "GPIO19"),
+        Pin(26, "SPI_CS_CC1101", "CC1101 chip select", PinType.SPI, "3.3V", 0, "CC1101 CS active low", "GPIO5"),
+        Pin(27, "SPI_CS_NRF24", "NRF24 chip select", PinType.SPI, "3.3V", 0, "NRF24 CS active low", "GPIO15"),
+        Pin(28, "SPI_CS_LORA", "LoRa chip select", PinType.SPI, "3.3V", 0, "LoRa E22 CS (if SPI mode)", "GPIO13"),
+        Pin(29, "SPI_CS_SD", "SD card chip select", PinType.SPI, "3.3V", 0, "SD card CS active low", "GPIO14"),
+        Pin(30, "SD_CD", "SD card detect", PinType.GPIO, "3.3V", 0, "Card detect active low", "GPIO27"),
         Pin(31, "GND", "Ground", PinType.GROUND, "GND", 0, "SPI ground"),
         Pin(32, "GND", "Ground", PinType.GROUND, "GND", 0, "SPI ground"),
         
         # ========== I2C BUS (Pins 33-38) ==========
-        Pin(33, "I2C_SCL", "I2C clock", PinType.I2C, "3.3V", 25, "Shared I2C bus, 4.7k pullup", "GPIO22"),
-        Pin(34, "I2C_SDA", "I2C data", PinType.I2C, "3.3V", 25, "Shared I2C bus, 4.7k pullup", "GPIO21"),
-        Pin(35, "I2C_INT1", "I2C interrupt 1", PinType.GPIO, "3.3V", 25, "Sensor interrupt (IMU)", "GPIO35"),
-        Pin(36, "I2C_INT2", "I2C interrupt 2", PinType.GPIO, "3.3V", 25, "Sensor interrupt", "GPIO34"),
+        Pin(33, "I2C_SCL", "I2C clock", PinType.I2C, "3.3V", 0, "Shared I2C bus, 4.7k pullup", "GPIO22"),
+        Pin(34, "I2C_SDA", "I2C data", PinType.I2C, "3.3V", 0, "Shared I2C bus, 4.7k pullup", "GPIO21"),
+        Pin(35, "I2C_INT1", "I2C interrupt 1", PinType.GPIO, "3.3V", 0, "Sensor interrupt (IMU)", "GPIO35"),
+        Pin(36, "I2C_INT2", "I2C interrupt 2", PinType.GPIO, "3.3V", 0, "Sensor interrupt", "GPIO34"),
         Pin(37, "GND", "Ground", PinType.GROUND, "GND", 0, "I2C ground"),
         Pin(38, "GND", "Ground", PinType.GROUND, "GND", 0, "I2C ground"),
         
         # ========== RF CONTROL PINS (Pins 39-50) ==========
-        Pin(39, "CC1101_GDO0", "CC1101 GDO0", PinType.RF, "3.3V", 25, "CC1101 data/interrupt", "GPIO32"),
-        Pin(40, "CC1101_GDO2", "CC1101 GDO2", PinType.RF, "3.3V", 25, "CC1101 status", "GPIO33"),
-        Pin(41, "NRF24_CE", "NRF24 chip enable", PinType.RF, "3.3V", 25, "NRF24 TX/RX mode", "GPIO4"),
-        Pin(42, "NRF24_IRQ", "NRF24 interrupt", PinType.RF, "3.3V", 25, "NRF24 interrupt", "GPIO16"),
-        Pin(43, "LORA_M0", "LoRa M0 mode", PinType.RF, "3.3V", 25, "LoRa E22 mode pin", "GPIO25"),
-        Pin(44, "LORA_M1", "LoRa M1 mode", PinType.RF, "3.3V", 25, "LoRa E22 mode pin", "GPIO26"),
-        Pin(45, "LORA_AUX", "LoRa auxiliary", PinType.RF, "3.3V", 25, "LoRa E22 status", "GPIO17"),
-        Pin(46, "GPS_PPS", "GPS pulse per second", PinType.GPIO, "3.3V", 25, "1Hz timing pulse", "GPIO36"),
-        Pin(47, "GPS_RESET", "GPS reset", PinType.CONTROL, "3.3V", 25, "GPS module reset", "GPIO12"),
+        Pin(39, "CC1101_GDO0", "CC1101 GDO0", PinType.RF, "3.3V", 0, "CC1101 data/interrupt", "GPIO32"),
+        Pin(40, "CC1101_GDO2", "CC1101 GDO2", PinType.RF, "3.3V", 0, "CC1101 status", "GPIO33"),
+        Pin(41, "NRF24_CE", "NRF24 chip enable", PinType.RF, "3.3V", 0, "NRF24 TX/RX mode", "GPIO4"),
+        Pin(42, "NRF24_IRQ", "NRF24 interrupt", PinType.RF, "3.3V", 0, "NRF24 interrupt", "GPIO16"),
+        Pin(43, "LORA_M0", "LoRa M0 mode", PinType.RF, "3.3V", 0, "LoRa E22 mode pin", "GPIO25"),
+        Pin(44, "LORA_M1", "LoRa M1 mode", PinType.RF, "3.3V", 0, "LoRa E22 mode pin", "GPIO26"),
+        Pin(45, "LORA_AUX", "LoRa auxiliary", PinType.RF, "3.3V", 0, "LoRa E22 status", "GPIO17"),
+        Pin(46, "GPS_PPS", "GPS pulse per second", PinType.GPIO, "3.3V", 0, "1Hz timing pulse", "GPIO36"),
+        Pin(47, "GPS_RESET", "GPS reset", PinType.CONTROL, "3.3V", 0, "GPS module reset", "GPIO12"),
         Pin(48, "GND", "Ground", PinType.GROUND, "GND", 0, "RF ground"),
         Pin(49, "GND", "Ground", PinType.GROUND, "GND", 0, "RF ground"),
         Pin(50, "GND", "Ground", PinType.GROUND, "GND", 0, "RF ground"),
         
         # ========== UART INTERFACES (Pins 51-58) ==========
-        Pin(51, "UART0_TX", "Debug UART TX", PinType.UART, "3.3V", 25, "Debug console output", "GPIO1"),
-        Pin(52, "UART0_RX", "Debug UART RX", PinType.UART, "3.3V", 25, "Debug console input", "GPIO3"),
-        Pin(53, "UART1_TX", "GPS UART TX", PinType.UART, "3.3V", 25, "GPS module TX", "GPIO17"),
-        Pin(54, "UART1_RX", "GPS UART RX", PinType.UART, "3.3V", 25, "GPS module RX", "GPIO16"),
-        Pin(55, "UART2_TX", "LoRa UART TX", PinType.UART, "3.3V", 25, "LoRa E22 UART TX", "GPIO17"),
-        Pin(56, "UART2_RX", "LoRa UART RX", PinType.UART, "3.3V", 25, "LoRa E22 UART RX", "GPIO16"),
+        # Note: GPS and LoRa share UART2 (mutually exclusive in UART mode)
+        Pin(51, "UART0_TX", "Debug UART TX", PinType.UART, "3.3V", 0, "Debug console output", "GPIO1"),
+        Pin(52, "UART0_RX", "Debug UART RX", PinType.UART, "3.3V", 0, "Debug console input", "GPIO3"),
+        Pin(53, "UART_GPS_TX", "GPS UART TX", PinType.UART, "3.3V", 0, "GPS module TX (UART2)", "GPIO17"),
+        Pin(54, "UART_GPS_RX", "GPS UART RX", PinType.UART, "3.3V", 0, "GPS module RX (UART2)", "GPIO16"),
+        Pin(55, "UART_LORA_TX", "LoRa UART TX", PinType.UART, "3.3V", 0, "LoRa E22 TX (shared UART2, use SPI for LoRa if GPS active)", "GPIO17"),
+        Pin(56, "UART_LORA_RX", "LoRa UART RX", PinType.UART, "3.3V", 0, "LoRa E22 RX (shared UART2, use SPI for LoRa if GPS active)", "GPIO16"),
         Pin(57, "GND", "Ground", PinType.GROUND, "GND", 0, "UART ground"),
         Pin(58, "GND", "Ground", PinType.GROUND, "GND", 0, "UART ground"),
         
         # ========== I2S AUDIO (Pins 59-66) ==========
-        Pin(59, "I2S_BCK", "I2S bit clock", PinType.I2S, "3.3V", 25, "Audio bit clock", "GPIO26"),
-        Pin(60, "I2S_WS", "I2S word select", PinType.I2S, "3.3V", 25, "Audio L/R select", "GPIO25"),
-        Pin(61, "I2S_DATA_IN", "I2S mic data", PinType.I2S, "3.3V", 25, "Microphone input", "GPIO22"),
-        Pin(62, "I2S_DATA_OUT", "I2S speaker data", PinType.I2S, "3.3V", 25, "Speaker amplifier out", "GPIO27"),
-        Pin(63, "AMP_ENABLE", "Amplifier enable", PinType.CONTROL, "3.3V", 25, "Speaker amp enable", "GPIO14"),
-        Pin(64, "HAPTIC_EN", "Haptic enable", PinType.CONTROL, "3.3V", 25, "Vibration motor enable", "GPIO13"),
+        Pin(59, "I2S_BCK", "I2S bit clock", PinType.I2S, "3.3V", 0, "Audio bit clock", "GPIO26"),
+        Pin(60, "I2S_WS", "I2S word select", PinType.I2S, "3.3V", 0, "Audio L/R select", "GPIO25"),
+        Pin(61, "I2S_DATA_IN", "I2S mic data", PinType.I2S, "3.3V", 0, "Microphone input", "GPIO22"),
+        Pin(62, "I2S_DATA_OUT", "I2S speaker data", PinType.I2S, "3.3V", 0, "Speaker amplifier out", "GPIO27"),
+        Pin(63, "AMP_ENABLE", "Amplifier enable", PinType.CONTROL, "3.3V", 0, "Speaker amp enable", "GPIO14"),
+        Pin(64, "HAPTIC_EN", "Haptic enable", PinType.CONTROL, "3.3V", 0, "Vibration motor enable", "GPIO13"),
         Pin(65, "GND", "Ground", PinType.GROUND, "GND", 0, "Audio ground"),
         Pin(66, "GND", "Ground", PinType.GROUND, "GND", 0, "Audio ground"),
         
         # ========== GPIO EXPANSION (Pins 67-82) - Flipper Zero compatible ==========
-        Pin(67, "FZ_GPIO1", "GPIO 1", PinType.GPIO, "3.3V", 25, "General purpose I/O", "GPIO2"),
-        Pin(68, "FZ_GPIO2", "GPIO 2", PinType.GPIO, "3.3V", 25, "General purpose I/O", "GPIO0"),
-        Pin(69, "FZ_GPIO3", "GPIO 3 / ADC1", PinType.ADC, "3.3V", 25, "ADC capable", "GPIO39"),
-        Pin(70, "FZ_GPIO4", "GPIO 4 / ADC2", PinType.ADC, "3.3V", 25, "ADC capable", "GPIO36"),
-        Pin(71, "FZ_GPIO5", "GPIO 5 / ADC3", PinType.ADC, "3.3V", 25, "ADC capable", "GPIO35"),
-        Pin(72, "FZ_GPIO6", "GPIO 6 / ADC4", PinType.ADC, "3.3V", 25, "ADC capable", "GPIO34"),
-        Pin(73, "FZ_GPIO7", "GPIO 7 / PWM1", PinType.PWM, "3.3V", 25, "PWM capable", "GPIO2"),
-        Pin(74, "FZ_GPIO8", "GPIO 8 / PWM2", PinType.PWM, "3.3V", 25, "PWM capable", "GPIO4"),
-        Pin(75, "FZ_GPIO9", "GPIO 9 / PWM3", PinType.PWM, "3.3V", 25, "PWM capable", "GPIO5"),
-        Pin(76, "FZ_GPIO10", "GPIO 10 / PWM4", PinType.PWM, "3.3V", 25, "PWM capable", "GPIO15"),
-        Pin(77, "FZ_GPIO11", "GPIO 11", PinType.GPIO, "3.3V", 25, "General purpose I/O", "GPIO33"),
-        Pin(78, "FZ_GPIO12", "GPIO 12", PinType.GPIO, "3.3V", 25, "General purpose I/O", "GPIO32"),
-        Pin(79, "FZ_GPIO13", "GPIO 13 / IR_TX", PinType.GPIO, "3.3V", 100, "IR transmitter (940nm LED)", "GPIO18"),
-        Pin(80, "FZ_GPIO14", "GPIO 14 / IR_RX", PinType.GPIO, "3.3V", 25, "IR receiver (38kHz demod)", "GPIO23"),
+        # Using remaining free GPIOs
+        Pin(67, "FZ_GPIO1", "GPIO 1", PinType.GPIO, "3.3V", 0, "General purpose I/O", "GPIO2"),
+        Pin(68, "FZ_GPIO2", "GPIO 2", PinType.GPIO, "3.3V", 0, "General purpose I/O", "GPIO0"),
+        Pin(69, "FZ_GPIO3", "GPIO 3 / ADC1", PinType.ADC, "3.3V", 0, "ADC capable (input only)", "GPIO39"),
+        Pin(70, "FZ_GPIO4", "GPIO 4 / ADC2", PinType.ADC, "3.3V", 0, "ADC capable (input only)", "GPIO36"),
+        Pin(71, "FZ_GPIO5", "GPIO 5 / ADC3", PinType.ADC, "3.3V", 0, "ADC capable (input only)", "GPIO35"),
+        Pin(72, "FZ_GPIO6", "GPIO 6 / ADC4", PinType.ADC, "3.3V", 0, "ADC capable (input only)", "GPIO34"),
+        Pin(73, "FZ_GPIO7", "GPIO 7 / PWM1", PinType.PWM, "3.3V", 0, "PWM capable (boot strapping)", "GPIO2"),
+        Pin(74, "FZ_GPIO8", "GPIO 8 / PWM2", PinType.PWM, "3.3V", 0, "PWM capable", "GPIO4"),
+        Pin(75, "FZ_GPIO9", "GPIO 9 / PWM3", PinType.PWM, "3.3V", 0, "PWM capable (boot strapping)", "GPIO5"),
+        Pin(76, "FZ_GPIO10", "GPIO 10 / PWM4", PinType.PWM, "3.3V", 0, "PWM capable (boot strapping)", "GPIO15"),
+        Pin(77, "FZ_GPIO11", "GPIO 11", PinType.GPIO, "3.3V", 0, "General purpose I/O", "GPIO33"),
+        Pin(78, "FZ_GPIO12", "GPIO 12", PinType.GPIO, "3.3V", 0, "General purpose I/O", "GPIO32"),
+        Pin(79, "FZ_GPIO13", "GPIO 13 / IR_TX", PinType.GPIO, "3.3V", 0, "IR transmitter (940nm LED)", "GPIO18"),
+        Pin(80, "FZ_GPIO14", "GPIO 14 / IR_RX", PinType.GPIO, "3.3V", 0, "IR receiver (38kHz demod)", "GPIO23"),
         Pin(81, "GND", "Ground", PinType.GROUND, "GND", 0, "GPIO ground"),
         Pin(82, "GND", "Ground", PinType.GROUND, "GND", 0, "GPIO ground"),
         
         # ========== MODULE SLOT 1 (Pins 83-90) ==========
-        Pin(83, "MOD1_5V", "Module 1 power 5V", PinType.MODULE_SLOT, "5V", 500, "Module slot 1 power"),
-        Pin(84, "MOD1_3V3", "Module 1 power 3.3V", PinType.MODULE_SLOT, "3.3V", 200, "Module slot 1 logic"),
+        Pin(83, "MOD1_5V", "Module 1 power 5V", PinType.MODULE_SLOT, "5V", 0, "Module slot 1 power"),
+        Pin(84, "MOD1_3V3", "Module 1 power 3.3V", PinType.MODULE_SLOT, "3.3V", 0, "Module slot 1 logic"),
         Pin(85, "MOD1_GND", "Module 1 ground", PinType.GROUND, "GND", 0, "Module slot 1 ground"),
-        Pin(86, "MOD1_SCL", "Module 1 I2C clock", PinType.MODULE_SLOT, "3.3V", 25, "I2C bus access", "GPIO22"),
-        Pin(87, "MOD1_SDA", "Module 1 I2C data", PinType.MODULE_SLOT, "3.3V", 25, "I2C bus access", "GPIO21"),
-        Pin(88, "MOD1_GPIO1", "Module 1 GPIO 1", PinType.MODULE_SLOT, "3.3V", 25, "Module control/data", "GPIO25"),
-        Pin(89, "MOD1_GPIO2", "Module 1 GPIO 2", PinType.MODULE_SLOT, "3.3V", 25, "Module control/data", "GPIO26"),
+        Pin(86, "MOD1_SCL", "Module 1 I2C clock", PinType.MODULE_SLOT, "3.3V", 0, "I2C bus access (shared GPIO22)", "GPIO22"),
+        Pin(87, "MOD1_SDA", "Module 1 I2C data", PinType.MODULE_SLOT, "3.3V", 0, "I2C bus access (shared GPIO21)", "GPIO21"),
+        Pin(88, "MOD1_GPIO1", "Module 1 GPIO 1", PinType.MODULE_SLOT, "3.3V", 0, "Module control/data (shared GPIO25)", "GPIO25"),
+        Pin(89, "MOD1_GPIO2", "Module 1 GPIO 2", PinType.MODULE_SLOT, "3.3V", 0, "Module control/data (shared GPIO26)", "GPIO26"),
         Pin(90, "MOD1_GND", "Module 1 ground", PinType.GROUND, "GND", 0, "Module slot 1 ground"),
         
         # ========== RESERVED & STATUS (Pins 91-98) ==========
-        Pin(91, "LED_STATUS", "Status LED", PinType.GPIO, "3.3V", 20, "User status LED", "GPIO2"),
-        Pin(92, "LED_POWER", "Power LED", PinType.GPIO, "3.3V", 20, "Power indicator LED", "GPIO0"),
-        Pin(93, "BOOT", "Boot mode", PinType.CONTROL, "3.3V", 25, "ESP32 boot mode (pull low)", "GPIO0"),
-        Pin(94, "RESET", "System reset", PinType.CONTROL, "3.3V", 25, "ESP32 reset (active low)", "EN"),
-        Pin(95, "RESERVED1", "Reserved 1", PinType.RESERVED, "3.3V", 25, "Future expansion"),
-        Pin(96, "RESERVED2", "Reserved 2", PinType.RESERVED, "3.3V", 25, "Future expansion"),
-        Pin(97, "RESERVED3", "Reserved 3", PinType.RESERVED, "3.3V", 25, "Future expansion"),
+        Pin(91, "LED_STATUS", "Status LED", PinType.GPIO, "3.3V", 0, "User status LED (shared GPIO2)", "GPIO2"),
+        Pin(92, "LED_POWER", "Power LED", PinType.GPIO, "3.3V", 0, "Power indicator LED (shared GPIO0)", "GPIO0"),
+        Pin(93, "BOOT", "Boot mode", PinType.CONTROL, "3.3V", 0, "ESP32 boot mode (pull low, shared GPIO0)", "GPIO0"),
+        Pin(94, "RESET", "System reset", PinType.CONTROL, "3.3V", 0, "ESP32 reset (active low)", "EN"),
+        Pin(95, "RESERVED1", "Reserved 1", PinType.RESERVED, "3.3V", 0, "Future expansion"),
+        Pin(96, "RESERVED2", "Reserved 2", PinType.RESERVED, "3.3V", 0, "Future expansion"),
+        Pin(97, "RESERVED3", "Reserved 3", PinType.RESERVED, "3.3V", 0, "Future expansion"),
         Pin(98, "GND", "Ground", PinType.GROUND, "GND", 0, "Final ground pin"),
     ]
     
@@ -494,24 +500,33 @@ class VikingBoardSpec:
             if pin.number < 1 or pin.number > cls.TOTAL_PINS:
                 errors.append(f"❌ Pin {pin.number} out of range (1-{cls.TOTAL_PINS})")
         
-        # Check power budget for each rail
-        for rail in cls.power_rails:
-            if rail.name in ["IO_3V3", "RF_3V3"]:
-                # Calculate load on this rail
-                total_current = sum(
-                    p.max_current_ma for p in cls.pins 
-                    if (rail.name == "IO_3V3" and p.voltage == "3.3V" and p.pin_type != PinType.GROUND) or
-                       (rail.name == "RF_3V3" and p.pin_type == PinType.RF)
-                ) / 1000.0
-                
-                if total_current > rail.max_current_a:
-                    errors.append(f"⚠️  {rail.name} power budget exceeded: {total_current:.2f}A > {rail.max_current_a}A")
+        # Check power budget for each rail (component-based, not pin-based)
+        # IO_3V3 rail budget
+        io_3v3_load = sum(comp.max_current_ma for comp in cls.components if comp.voltage == "3.3V" and comp.category != "Power") / 1000.0
+        io_rail = next((r for r in cls.power_rails if r.name == "IO_3V3"), None)
+        if io_rail and io_3v3_load > io_rail.max_current_a:
+            errors.append(f"⚠️  IO_3V3 power budget exceeded: {io_3v3_load:.2f}A > {io_rail.max_current_a}A")
         
-        # Check for GPIO conflicts
-        esp32_gpios = [p.esp32_gpio for p in cls.pins if p.esp32_gpio]
-        if len(esp32_gpios) != len(set(esp32_gpios)):
-            duplicates = [gpio for gpio in esp32_gpios if esp32_gpios.count(gpio) > 1]
-            errors.append(f"⚠️  Duplicate ESP32 GPIO assignments: {set(duplicates)}")
+        # RF_3V3 rail budget (estimate from datasheets)
+        rf_3v3_load = 0.12 + 0.03 + 0.012 + 0.03  # LoRa + CC1101 + NRF24 + GPS (max simultaneous)
+        rf_rail = next((r for r in cls.power_rails if r.name == "RF_3V3"), None)
+        if rf_rail and rf_3v3_load > rf_rail.max_current_a:
+            errors.append(f"⚠️  RF_3V3 power budget exceeded: {rf_3v3_load:.2f}A > {rf_rail.max_current_a}A")
+        
+        # Check for GPIO conflicts (allow intentional sharing with note)
+        esp32_gpios = [p.esp32_gpio for p in cls.pins if p.esp32_gpio and p.esp32_gpio != "EN"]
+        gpio_counts = {gpio: esp32_gpios.count(gpio) for gpio in set(esp32_gpios)}
+        duplicates = {gpio: count for gpio, count in gpio_counts.items() if count > 1}
+        
+        # Check if duplicates are intentional (noted as "shared")
+        unintentional_dups = []
+        for gpio in duplicates:
+            pins_with_gpio = [p for p in cls.pins if p.esp32_gpio == gpio]
+            if not all("shared" in p.notes.lower() for p in pins_with_gpio):
+                unintentional_dups.append(gpio)
+        
+        if unintentional_dups:
+            errors.append(f"⚠️  Unintentional duplicate ESP32 GPIO assignments: {set(unintentional_dups)}")
         
         return errors
     
@@ -531,8 +546,12 @@ class VikingBoardSpec:
         print(f"  • Power rails: {len(cls.power_rails)}")
         print(f"  • Components: {len(cls.components)}\n")
         
-        # Power budget summary
-        print(f"⚡ Power Budget:")
+        # Power budget summary (component-based)
+        print(f"⚡ Power Budget (Component-based):")
+        io_3v3_load = sum(comp.max_current_ma for comp in cls.components if comp.voltage == "3.3V" and comp.category != "Power") / 1000.0
+        print(f"  • IO_3V3 load: {io_3v3_load:.3f}A (LDO rated 1.0A)")
+        rf_3v3_load = 0.12 + 0.03 + 0.012 + 0.03  # LoRa + CC1101 + NRF24 + GPS
+        print(f"  • RF_3V3 load: {rf_3v3_load:.3f}A (LDO rated 0.3A)")
         for rail in cls.power_rails:
             print(f"  • {rail.name}: {rail.voltage}V / {rail.max_current_a}A ({rail.voltage * rail.max_current_a}W)")
         print()
