@@ -1,7 +1,7 @@
-# VikingBoard nett-oversikt
+# VikingBoard Net Table
 
 | Ref | Pad | Net |
-| :-- | :-- | :-- |
+| :-- | :-- | :--- |
 | J1 | 1 | `+5V_SYS` |
 | J1 | 2 | `+3V3_IO` |
 | J1 | 3 | `GND` |
