@@ -120,21 +120,21 @@ def apply_nets_from_spec(spec: Dict[Tuple[str, str], str]):
             pad.SetNet(netinfo)
             changed += 1
 
-    print("\\n--- Summary ---")
+    print("\n--- Summary ---")
     print(f"Total spec entries  : {total}")
     print(f"Footprints not found: {fp_not_found}")
     print(f"Pads not found      : {pads_not_found}")
     print(f"Pads changed        : {changed}")
     if DRY_RUN:
-        print("\\n[NOTE] DRY_RUN is True. No changes were written to the board.")
+        print("\n[NOTE] DRY_RUN is True. No changes were written to the board.")
         print("       Set DRY_RUN = False and reload the module to apply changes.")
     else:
-        print("\\n[NOTE] Changes written to the board. Save the PCB to persist.")
+        print("\n[NOTE] Changes written to the board. Save the PCB to persist.")
 
 
 def print_markdown_preview(spec: Dict[Tuple[str, str], str]):
     rows = list(spec.items())
-    print("\\n--- Markdown pin map (from spec) ---")
+    print("\n--- Markdown pin map (from spec) ---")
     print("| Ref | Pad | Net |")
     print("| :-- | :-- | :-- |")
     for (ref, pad), net in sorted(rows):

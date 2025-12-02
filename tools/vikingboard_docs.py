@@ -1,57 +1,49 @@
 #!/usr/bin/env python3
 """
-Generate VikingBoard documentation from the spec.
+VikingBoard documentation generator.
 
-Outputs:
-- docs/vikingboard_nets.md
-- docs/vikingboard_nets.csv
+Leser pins fra vikingboard_spec.get_all_pins() og genererer:
+- docs/vikingboard_nets.md (Markdown tabell)
+- docs/vikingboard_nets.csv (CSV)
 """
 
+import csv
 from pathlib import Path
-import sys
-
-# Project root = parent of this file's directory
-ROOT = Path(__file__).resolve().parents[1]
-TOOLS_DIR = ROOT / "tools"
-sys.path.append(str(TOOLS_DIR))
-
-from vikingboard_spec import iter_net_rows  # type: ignore
-
-DOCS_DIR = ROOT / "docs"
-DOCS_DIR.mkdir(exist_ok=True)
+from typing import List
+from vikingboard_spec import get_all_pins, Pin  # type: ignore
 
 
-def write_markdown() -> None:
-    md_path = DOCS_DIR / "vikingboard_nets.md"
-    rows = list(iter_net_rows())
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DOCS_DIR = REPO_ROOT / "docs"
+MD_PATH = DOCS_DIR / "vikingboard_nets.md"
+CSV_PATH = DOCS_DIR / "vikingboard_nets.csv"
 
-    with md_path.open("w", encoding="utf-8") as f:
-        f.write("# VikingBoard Net Table\n\n")
+
+def generate_markdown(pins: List[Pin], path: Path) -> None:
+    DOCS_DIR.mkdir(exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        f.write("# VikingBoard net overview\n\n")
         f.write("| Ref | Pad | Net |\n")
-        f.write("| :-- | :-- | :--- |\n")
-        for row in rows:
-            f.write(f"| {row['Ref']} | {row['Pad']} | `{row['Net']}` |\n")
-
-    print(f"✅ Wrote {md_path}")
+        f.write("| :-- | :-- | :-- |\n")
+        for pin in sorted(pins, key=lambda p: (p.ref, str(p.pad))):
+            f.write(f"| {pin.ref} | {pin.pad} | `{pin.net}` |\n")
 
 
-def write_csv() -> None:
-    csv_path = DOCS_DIR / "vikingboard_nets.csv"
-    rows = list(iter_net_rows())
-
-    with csv_path.open("w", encoding="utf-8") as f:
-        f.write("Ref,Pad,Net\n")
-        for row in rows:
-            f.write(f"{row['Ref']},{row['Pad']},{row['Net']}\n")
-
-    print(f"✅ Wrote {csv_path}")
+def generate_csv(pins: List[Pin], path: Path) -> None:
+    DOCS_DIR.mkdir(exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Ref", "Pad", "Net"])
+        for pin in sorted(pins, key=lambda p: (p.ref, str(p.pad))):
+            writer.writerow([pin.ref, pin.pad, pin.net])
 
 
 def main() -> None:
-    print("🔧 Generating VikingBoard docs from spec...")
-    write_markdown()
-    write_csv()
-    print("🎉 Done.")
+    pins = get_all_pins()
+    print(f"[INFO] Loaded {len(pins)} pins from vikingboard_spec.get_all_pins()")
+    generate_markdown(pins, MD_PATH)
+    generate_csv(pins, CSV_PATH)
+    print(f"[INFO] Wrote {MD_PATH} and {CSV_PATH}")
 
 
 if __name__ == "__main__":

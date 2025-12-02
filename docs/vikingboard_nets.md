@@ -1,16 +1,8 @@
-# VikingBoard Net Table
+# VikingBoard net overview
 
 | Ref | Pad | Net |
-| :-- | :-- | :--- |
+| :-- | :-- | :-- |
 | J1 | 1 | `+5V_SYS` |
-| J1 | 2 | `+3V3_IO` |
-| J1 | 3 | `GND` |
-| J1 | 4 | `GPS_RX` |
-| J1 | 5 | `I2C_SCL` |
-| J1 | 6 | `I2C_SDA` |
-| J1 | 7 | `SPI_SCK` |
-| J1 | 8 | `SPI_MOSI` |
-| J1 | 9 | `SPI_MISO` |
 | J1 | 10 | `GPS_TX` |
 | J1 | 11 | `FZ_GPIO1` |
 | J1 | 12 | `FZ_GPIO2` |
@@ -20,6 +12,14 @@
 | J1 | 16 | `EN` |
 | J1 | 17 | `GND` |
 | J1 | 18 | `+5V_SYS` |
+| J1 | 2 | `+3V3_IO` |
+| J1 | 3 | `GND` |
+| J1 | 4 | `GPS_RX` |
+| J1 | 5 | `I2C_SCL` |
+| J1 | 6 | `I2C_SDA` |
+| J1 | 7 | `SPI_SCK` |
+| J1 | 8 | `SPI_MOSI` |
+| J1 | 9 | `SPI_MISO` |
 | J3 | 1 | `GND` |
 | J3 | 2 | `+3V3_IO` |
 | J3 | 3 | `I2C_SDA` |
@@ -30,20 +30,21 @@
 | U1 | 13 | `I2C_SCL` |
 | U1 | 14 | `I2C_SDA` |
 | U1 | 21 | `MCP_INT` |
-| U1 | 5V | `+5V_SYS` |
-| U1 | GND | `GND` |
-| U1 | EN | `EN` |
 | U1 | 43 | `GPS_RX` |
 | U1 | 44 | `GPS_TX` |
+| U1 | 5V | `+5V_SYS` |
+| U1 | EN | `EN` |
+| U1 | GND | `GND` |
+| U2 | 1 | `NRF24_IRQ` |
 | U2 | 10 | `GND` |
-| U2 | 9 | `+3V3_IO` |
 | U2 | 12 | `I2C_SCL` |
 | U2 | 13 | `I2C_SDA` |
-| U2 | 20 | `MCP_INT` |
-| U2 | 18 | `EN` |
 | U2 | 15 | `GND` |
 | U2 | 16 | `GND` |
 | U2 | 17 | `GND` |
+| U2 | 18 | `EN` |
+| U2 | 2 | `KBD_RST` |
+| U2 | 20 | `MCP_INT` |
 | U2 | 21 | `LORA_CS` |
 | U2 | 22 | `LORA_BUSY` |
 | U2 | 23 | `LORA_DIO1` |
@@ -52,15 +53,15 @@
 | U2 | 26 | `CC1101_GDO0` |
 | U2 | 27 | `NRF24_CS` |
 | U2 | 28 | `NRF24_CE` |
-| U2 | 1 | `NRF24_IRQ` |
-| U2 | 2 | `KBD_RST` |
 | U2 | 3 | `KBD_INT` |
 | U2 | 4 | `FZ_GPIO1` |
 | U2 | 5 | `FZ_GPIO2` |
 | U2 | 6 | `FZ_GPIO3` |
 | U2 | 7 | `FZ_GPIO4` |
 | U2 | 8 | `FZ_GPIO5` |
+| U2 | 9 | `+3V3_IO` |
 | U3 | 1 | `+3V3_RF` |
+| U3 | 10 | `LORA_ANT` |
 | U3 | 2 | `GND` |
 | U3 | 3 | `EN` |
 | U3 | 4 | `LORA_BUSY` |
@@ -69,7 +70,6 @@
 | U3 | 7 | `SPI_SCK` |
 | U3 | 8 | `SPI_MOSI` |
 | U3 | 9 | `SPI_MISO` |
-| U3 | 10 | `LORA_ANT` |
 | U4 | 1 | `+3V3_RF` |
 | U4 | 2 | `GND` |
 | U4 | 3 | `CC1101_CS` |

@@ -1,150 +1,142 @@
 #!/usr/bin/env python3
 """
-VikingBoard connectivity specification.
+vikingboard_spec.py - Single source of truth for VikingBoard nets.
 
-Single source of truth for:
-- Components U1..U8
-- Connectors J1, J3
-- Ref / Pad / Net mapping
+Denne versjonen er enkel: én Pin per linje, matchet til tabellen du allerede har
+(i vikingboard_nets.md / CSV). Juster senere hvis du vil ha mer struktur.
 """
 
 from dataclasses import dataclass
 from typing import List
 
 
-@dataclass(frozen=True)
-class NetEntry:
-    ref: str
-    pad: str
-    net: str
+@dataclass
+class Pin:
+    ref: str   # Reference designator, e.g. "J1"
+    pad: str   # Pad number/name, e.g. "1" eller "5V"
+    net: str   # Net name, e.g. "+3V3_IO"
 
 
-VIKINGBOARD_NET_TABLE: List[NetEntry] = [
-    # J1 – Flipper header (2x9)
-    NetEntry("J1", "1",  "+5V_SYS"),
-    NetEntry("J1", "2",  "+3V3_IO"),
-    NetEntry("J1", "3",  "GND"),
-    NetEntry("J1", "4",  "GPS_RX"),
-    NetEntry("J1", "5",  "I2C_SCL"),
-    NetEntry("J1", "6",  "I2C_SDA"),
-    NetEntry("J1", "7",  "SPI_SCK"),
-    NetEntry("J1", "8",  "SPI_MOSI"),
-    NetEntry("J1", "9",  "SPI_MISO"),
-    NetEntry("J1", "10", "GPS_TX"),
-    NetEntry("J1", "11", "FZ_GPIO1"),
-    NetEntry("J1", "12", "FZ_GPIO2"),
-    NetEntry("J1", "13", "FZ_GPIO3"),
-    NetEntry("J1", "14", "FZ_GPIO4"),
-    NetEntry("J1", "15", "FZ_GPIO5"),
-    NetEntry("J1", "16", "EN"),
-    NetEntry("J1", "17", "GND"),
-    NetEntry("J1", "18", "+5V_SYS"),
+def get_all_pins() -> List[Pin]:
+    """Returnerer alle pinner som en liste av Pin-objekter."""
+    pins: List[Pin] = []
 
-    # J3 – Qwiic connector
-    NetEntry("J3", "1", "GND"),
-    NetEntry("J3", "2", "+3V3_IO"),
-    NetEntry("J3", "3", "I2C_SDA"),
-    NetEntry("J3", "4", "I2C_SCL"),
+    # J1 (hovedheader)
+    pins.append(Pin("J1", "1", "+5V_SYS"))
+    pins.append(Pin("J1", "2", "+3V3_IO"))
+    pins.append(Pin("J1", "3", "GND"))
+    pins.append(Pin("J1", "4", "GPS_RX"))
+    pins.append(Pin("J1", "5", "I2C_SCL"))
+    pins.append(Pin("J1", "6", "I2C_SDA"))
+    pins.append(Pin("J1", "7", "SPI_SCK"))
+    pins.append(Pin("J1", "8", "SPI_MOSI"))
+    pins.append(Pin("J1", "9", "SPI_MISO"))
+    pins.append(Pin("J1", "10", "GPS_TX"))
+    pins.append(Pin("J1", "11", "FZ_GPIO1"))
+    pins.append(Pin("J1", "12", "FZ_GPIO2"))
+    pins.append(Pin("J1", "13", "FZ_GPIO3"))
+    pins.append(Pin("J1", "14", "FZ_GPIO4"))
+    pins.append(Pin("J1", "15", "FZ_GPIO5"))
+    pins.append(Pin("J1", "16", "EN"))
+    pins.append(Pin("J1", "17", "GND"))
+    pins.append(Pin("J1", "18", "+5V_SYS"))
 
-    # U1 – WT32-SC01 Plus baseboard header abstraction
-    NetEntry("U1", "10", "SPI_SCK"),
-    NetEntry("U1", "11", "SPI_MOSI"),
-    NetEntry("U1", "12", "SPI_MISO"),
-    NetEntry("U1", "13", "I2C_SCL"),
-    NetEntry("U1", "14", "I2C_SDA"),
-    NetEntry("U1", "21", "MCP_INT"),
-    NetEntry("U1", "5V", "+5V_SYS"),
-    NetEntry("U1", "GND", "GND"),
-    NetEntry("U1", "EN", "EN"),
-    NetEntry("U1", "43", "GPS_RX"),
-    NetEntry("U1", "44", "GPS_TX"),
+    # J3 (Flipper-header)
+    pins.append(Pin("J3", "1", "GND"))
+    pins.append(Pin("J3", "2", "+3V3_IO"))
+    pins.append(Pin("J3", "3", "I2C_SDA"))
+    pins.append(Pin("J3", "4", "I2C_SCL"))
 
-    # U2 – MCP23017
-    NetEntry("U2", "10", "GND"),
-    NetEntry("U2", "9",  "+3V3_IO"),
-    NetEntry("U2", "12", "I2C_SCL"),
-    NetEntry("U2", "13", "I2C_SDA"),
-    NetEntry("U2", "20", "MCP_INT"),
-    NetEntry("U2", "18", "EN"),
-    NetEntry("U2", "15", "GND"),
-    NetEntry("U2", "16", "GND"),
-    NetEntry("U2", "17", "GND"),
-    NetEntry("U2", "21", "LORA_CS"),
-    NetEntry("U2", "22", "LORA_BUSY"),
-    NetEntry("U2", "23", "LORA_DIO1"),
-    NetEntry("U2", "24", "GPS_PPS"),
-    NetEntry("U2", "25", "CC1101_CS"),
-    NetEntry("U2", "26", "CC1101_GDO0"),
-    NetEntry("U2", "27", "NRF24_CS"),
-    NetEntry("U2", "28", "NRF24_CE"),
-    NetEntry("U2", "1",  "NRF24_IRQ"),
-    NetEntry("U2", "2",  "KBD_RST"),
-    NetEntry("U2", "3",  "KBD_INT"),
-    NetEntry("U2", "4",  "FZ_GPIO1"),
-    NetEntry("U2", "5",  "FZ_GPIO2"),
-    NetEntry("U2", "6",  "FZ_GPIO3"),
-    NetEntry("U2", "7",  "FZ_GPIO4"),
-    NetEntry("U2", "8",  "FZ_GPIO5"),
+    # U1 (WT32-SC01 / ESP32-S3 modul)
+    pins.append(Pin("U1", "10", "SPI_SCK"))
+    pins.append(Pin("U1", "11", "SPI_MOSI"))
+    pins.append(Pin("U1", "12", "SPI_MISO"))
+    pins.append(Pin("U1", "13", "I2C_SCL"))
+    pins.append(Pin("U1", "14", "I2C_SDA"))
+    pins.append(Pin("U1", "21", "MCP_INT"))
+    pins.append(Pin("U1", "43", "GPS_RX"))
+    pins.append(Pin("U1", "44", "GPS_TX"))
+    pins.append(Pin("U1", "5V", "+5V_SYS"))
+    pins.append(Pin("U1", "EN", "EN"))
+    pins.append(Pin("U1", "GND", "GND"))
 
-    # U3 – LoRa E22 header (1x10)
-    NetEntry("U3", "1",  "+3V3_RF"),
-    NetEntry("U3", "2",  "GND"),
-    NetEntry("U3", "3",  "EN"),
-    NetEntry("U3", "4",  "LORA_BUSY"),
-    NetEntry("U3", "5",  "LORA_DIO1"),
-    NetEntry("U3", "6",  "LORA_CS"),
-    NetEntry("U3", "7",  "SPI_SCK"),
-    NetEntry("U3", "8",  "SPI_MOSI"),
-    NetEntry("U3", "9",  "SPI_MISO"),
-    NetEntry("U3", "10", "LORA_ANT"),
+    # U2 (MCP23017 + ekstra funksjoner)
+    pins.append(Pin("U2", "1", "NRF24_IRQ"))
+    pins.append(Pin("U2", "2", "KBD_RST"))
+    pins.append(Pin("U2", "3", "KBD_INT"))
+    pins.append(Pin("U2", "4", "FZ_GPIO1"))
+    pins.append(Pin("U2", "5", "FZ_GPIO2"))
+    pins.append(Pin("U2", "6", "FZ_GPIO3"))
+    pins.append(Pin("U2", "7", "FZ_GPIO4"))
+    pins.append(Pin("U2", "8", "FZ_GPIO5"))
+    pins.append(Pin("U2", "9", "+3V3_IO"))
+    pins.append(Pin("U2", "10", "GND"))
+    pins.append(Pin("U2", "12", "I2C_SCL"))
+    pins.append(Pin("U2", "13", "I2C_SDA"))
+    pins.append(Pin("U2", "15", "GND"))
+    pins.append(Pin("U2", "16", "GND"))
+    pins.append(Pin("U2", "17", "GND"))
+    pins.append(Pin("U2", "18", "EN"))
+    pins.append(Pin("U2", "20", "MCP_INT"))
+    pins.append(Pin("U2", "21", "LORA_CS"))
+    pins.append(Pin("U2", "22", "LORA_BUSY"))
+    pins.append(Pin("U2", "23", "LORA_DIO1"))
+    pins.append(Pin("U2", "24", "GPS_PPS"))
+    pins.append(Pin("U2", "25", "CC1101_CS"))
+    pins.append(Pin("U2", "26", "CC1101_GDO0"))
+    pins.append(Pin("U2", "27", "NRF24_CS"))
+    pins.append(Pin("U2", "28", "NRF24_CE"))
 
-    # U4 – CC1101
-    NetEntry("U4", "1", "+3V3_RF"),
-    NetEntry("U4", "2", "GND"),
-    NetEntry("U4", "3", "CC1101_CS"),
-    NetEntry("U4", "4", "SPI_SCK"),
-    NetEntry("U4", "5", "SPI_MOSI"),
-    NetEntry("U4", "6", "SPI_MISO"),
-    NetEntry("U4", "7", "CC1101_GDO0"),
+    # U3 (LoRa E22)
+    pins.append(Pin("U3", "1", "+3V3_RF"))
+    pins.append(Pin("U3", "2", "GND"))
+    pins.append(Pin("U3", "3", "EN"))
+    pins.append(Pin("U3", "4", "LORA_BUSY"))
+    pins.append(Pin("U3", "5", "LORA_DIO1"))
+    pins.append(Pin("U3", "6", "LORA_CS"))
+    pins.append(Pin("U3", "7", "SPI_SCK"))
+    pins.append(Pin("U3", "8", "SPI_MOSI"))
+    pins.append(Pin("U3", "9", "SPI_MISO"))
+    pins.append(Pin("U3", "10", "LORA_ANT"))
 
-    # U5 – NRF24L01+
-    NetEntry("U5", "1", "+3V3_RF"),
-    NetEntry("U5", "2", "GND"),
-    NetEntry("U5", "3", "SPI_SCK"),
-    NetEntry("U5", "4", "SPI_MOSI"),
-    NetEntry("U5", "5", "SPI_MISO"),
-    NetEntry("U5", "6", "NRF24_CS"),
-    NetEntry("U5", "7", "NRF24_CE"),
-    NetEntry("U5", "8", "NRF24_IRQ"),
+    # U4 (CC1101)
+    pins.append(Pin("U4", "1", "+3V3_RF"))
+    pins.append(Pin("U4", "2", "GND"))
+    pins.append(Pin("U4", "3", "CC1101_CS"))
+    pins.append(Pin("U4", "4", "SPI_SCK"))
+    pins.append(Pin("U4", "5", "SPI_MOSI"))
+    pins.append(Pin("U4", "6", "SPI_MISO"))
+    pins.append(Pin("U4", "7", "CC1101_GDO0"))
 
-    # U6 – TCA8418
-    NetEntry("U6", "1",  "KBD_INT"),
-    NetEntry("U6", "12", "I2C_SCL"),
-    NetEntry("U6", "13", "I2C_SDA"),
-    NetEntry("U6", "19", "KBD_RST"),
-    NetEntry("U6", "21", "GND"),
-    NetEntry("U6", "24", "+3V3_KBD"),
+    # U5 (NRF24L01+ modul)
+    pins.append(Pin("U5", "1", "+3V3_RF"))
+    pins.append(Pin("U5", "2", "GND"))
+    pins.append(Pin("U5", "3", "SPI_SCK"))
+    pins.append(Pin("U5", "4", "SPI_MOSI"))
+    pins.append(Pin("U5", "5", "SPI_MISO"))
+    pins.append(Pin("U5", "6", "NRF24_CS"))
+    pins.append(Pin("U5", "7", "NRF24_CE"))
+    pins.append(Pin("U5", "8", "NRF24_IRQ"))
 
-    # U7 – GPS header (1x5)
-    NetEntry("U7", "1", "+3V3_IO"),
-    NetEntry("U7", "2", "GND"),
-    NetEntry("U7", "3", "GPS_RX"),
-    NetEntry("U7", "4", "GPS_TX"),
-    NetEntry("U7", "5", "GPS_PPS"),
+    # U6 (TCA8418 keypad controller)
+    pins.append(Pin("U6", "1", "KBD_INT"))
+    pins.append(Pin("U6", "12", "I2C_SCL"))
+    pins.append(Pin("U6", "13", "I2C_SDA"))
+    pins.append(Pin("U6", "19", "KBD_RST"))
+    pins.append(Pin("U6", "21", "GND"))
+    pins.append(Pin("U6", "24", "+3V3_KBD"))
 
-    # U8 – DRV2605L
-    NetEntry("U8", "1", "+3V3_IO"),
-    NetEntry("U8", "2", "GND"),
-    NetEntry("U8", "3", "I2C_SCL"),
-    NetEntry("U8", "4", "I2C_SDA"),
-]
+    # U7 (GPS)
+    pins.append(Pin("U7", "1", "+3V3_IO"))
+    pins.append(Pin("U7", "2", "GND"))
+    pins.append(Pin("U7", "3", "GPS_RX"))
+    pins.append(Pin("U7", "4", "GPS_TX"))
+    pins.append(Pin("U7", "5", "GPS_PPS"))
 
+    # U8 (DRV2605L / Qwiic/I2C periferi)
+    pins.append(Pin("U8", "1", "+3V3_IO"))
+    pins.append(Pin("U8", "2", "GND"))
+    pins.append(Pin("U8", "3", "I2C_SCL"))
+    pins.append(Pin("U8", "4", "I2C_SDA"))
 
-def iter_net_rows():
-    """Helper for tools that want plain dicts."""
-    for entry in VIKINGBOARD_NET_TABLE:
-        yield {
-            "Ref": entry.ref,
-            "Pad": entry.pad,
-            "Net": entry.net,
-        }
+    return pins
