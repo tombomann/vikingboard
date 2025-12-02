@@ -4253,7 +4253,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -190.5 15.24 0)
 			(effects
 				(font
@@ -4425,7 +4425,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -433.07 389.89 0)
 			(effects
 				(font
@@ -4559,7 +4559,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -431.8 320.04 0)
 			(effects
 				(font
@@ -4677,7 +4677,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -329.565 -51.435 90)
 			(effects
 				(font
@@ -4748,7 +4748,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -316.23 374.65 0)
 			(effects
 				(font
@@ -4839,7 +4839,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DFN_QFN:QFN-28-1EP_6x6mm_P0.65mm_EP4.8x4.8mm"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -328.93 29.21 0)
 			(effects
 				(font
@@ -4990,7 +4990,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -509.27 389.89 0)
 			(effects
 				(font
@@ -5069,7 +5069,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -313.69 203.2 0)
 			(effects
 				(font
@@ -5160,7 +5160,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_SO:VSSOP-10_3x3mm_P0.5mm"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at -435.61 455.93 0)
 			(effects
 				(font

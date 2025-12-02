@@ -42,7 +42,7 @@ def get_all_pins() -> List[Pin]:
     pins.append(Pin("J2", "7", "FZ_GPIO5"))
     pins.append(Pin("J2", "8", "EN"))
 
-    # U1 (ESP/WT32, pads 1-8 prototype mapping)
+    # U1 (ESP/WT32, pads 1-5 prototype mapping)
     pins.append(Pin("U1", "1", "+5V_SYS"))
     pins.append(Pin("U1", "2", "GND"))
     pins.append(Pin("U1", "3", "EN"))
