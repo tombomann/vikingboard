@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "VikingBoard Status"
+echo "=================="
+[[ -f production_output/vikingboard_gerbers_*.zip ]] && echo "✅ Gerbers" || echo "❌ Gerbers"
+[[ -f production_output/vikingboard_bom.csv ]] && echo "✅ BOM" || echo "❌ BOM"
+[[ -f production_output/vikingboard_cpl.csv ]] && echo "✅ CPL" || echo "❌ CPL"
+[[ -f production_output/vikingboard_3d.step ]] && echo "✅ 3D Model" || echo "❌ 3D Model"
+[[ -f production_output/jlcpcb_complete_*.zip ]] && echo "✅ JLCPCB Bundle" || echo "⚠️  JLCPCB Bundle"
+echo ""
+grep "Found" reports/drc_report.txt 2>/dev/null || echo "No DRC report"

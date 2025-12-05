@@ -1,0 +1,196 @@
+(pcb /Users/taj/vikingboard/kicad/Vikingboard123.dsn
+  (parser
+    (string_quote ")
+    (space_in_quoted_tokens on)
+    (host_cad "KiCad's Pcbnew")
+    (host_version "9.0.6")
+  )
+  (resolution um 10)
+  (unit um)
+  (structure
+    (layer F.Cu
+      (type signal)
+      (property
+        (index 0)
+      )
+    )
+    (layer B.Cu
+      (type signal)
+      (property
+        (index 1)
+      )
+    )
+    (boundary
+      (path pcb 0  133982 -116808  36652.6 -116808  36652.6 -61611.8  133982 -61611.8
+            133982 -116808)
+    )
+    (plane GND (polygon B.Cu 0  45000 -65000  130000 -65000  130000 -115000  45000 -115000
+            45000 -65000))
+    (plane GND (polygon B.Cu 0  45000 -65000  130000 -65000  130000 -115000  45000 -115000
+            45000 -65000))
+    (via "Via[0-1]_600:300_um")
+    (rule
+      (width 200)
+      (clearance 200)
+      (clearance 50 (type smd_smd))
+    )
+  )
+  (placement
+    (component Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical
+      (place U2 111000.000000 -90800.000000 front 0.000000 (PN DRV2605LDGS))
+      (place U1 59410.000000 -69840.000000 front 0.000000 (PN Conn_01x05))
+      (place U7 77770.000000 -69840.000000 front 0.000000 (PN Conn_01x08_Shielded))
+      (place U3 64000.000000 -69840.000000 front 0.000000 (PN PAL24))
+      (place U6 73180.000000 -69840.000000 front 0.000000 (PN Conn_02x04_Odd_Even_Shielded))
+      (place J1 50230.000000 -69840.000000 front 0.000000 (PN Conn_02x09_Odd_Even))
+      (place J2 54820.000000 -69840.000000 front 0.000000 (PN Conn_02x18_Odd_Even))
+      (place U4 68590.000000 -69840.000000 front 0.000000 (PN Q_Triac))
+      (place U5 126000.000000 -90760.000000 front 0.000000 (PN SX1276))
+    )
+  )
+  (library
+    (image Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical
+      (outline (path signal 120  -1380 1380  0 1380))
+      (outline (path signal 120  -1380 0  -1380 1380))
+      (outline (path signal 120  -1380 -1270  -1380 -19160))
+      (outline (path signal 120  -1380 -1270  1380 -1270))
+      (outline (path signal 120  -1380 -19160  1380 -19160))
+      (outline (path signal 120  1380 -1270  1380 -19160))
+      (outline (path signal 50  -1770 1770  -1770 -19550))
+      (outline (path signal 50  -1770 -19550  1770 -19550))
+      (outline (path signal 50  1770 1770  -1770 1770))
+      (outline (path signal 50  1770 -19550  1770 1770))
+      (outline (path signal 100  -1270 635  -635 1270))
+      (outline (path signal 100  -1270 -19050  -1270 635))
+      (outline (path signal 100  -635 1270  1270 1270))
+      (outline (path signal 100  1270 1270  1270 -19050))
+      (outline (path signal 100  1270 -19050  -1270 -19050))
+      (pin Rect[A]Pad_1700.000000x1700.000000_um 1 0 0)
+      (pin Round[A]Pad_1700.000000_um 2 0 -2540)
+      (pin Round[A]Pad_1700.000000_um 3 0 -5080)
+      (pin Round[A]Pad_1700.000000_um 4 0 -7620)
+      (pin Round[A]Pad_1700.000000_um 5 0 -10160)
+      (pin Round[A]Pad_1700.000000_um 6 0 -12700)
+      (pin Round[A]Pad_1700.000000_um 7 0 -15240)
+      (pin Round[A]Pad_1700.000000_um 8 0 -17780)
+    )
+    (padstack Round[A]Pad_1700.000000_um
+      (shape (circle F.Cu 1700))
+      (shape (circle B.Cu 1700))
+      (attach off)
+    )
+    (padstack Rect[A]Pad_1700.000000x1700.000000_um
+      (shape (rect F.Cu -850 -850 850 850))
+      (shape (rect B.Cu -850 -850 850 850))
+      (attach off)
+    )
+    (padstack "Via[0-1]_600:300_um"
+      (shape (circle F.Cu 600))
+      (shape (circle B.Cu 600))
+      (attach off)
+    )
+  )
+  (network
+    (net +5V_SYS
+      (pins U1-1 J1-1)
+    )
+    (net +3V3_IO
+      (pins U7-1 J1-2)
+    )
+    (net GND
+      (pins U1-2 U7-2 U7-6 U7-7 U7-8 U3-2 U6-5 U6-7 U6-8 J1-3 U4-2 U4-8 U5-2)
+    )
+    (net GPS_RX
+      (pins U7-3 J1-4)
+    )
+    (net I2C_SCL
+      (pins U6-2 J1-5)
+    )
+    (net I2C_SDA
+      (pins U6-3 J1-6)
+    )
+    (net SPI_SCK
+      (pins U1-4 U3-7 J1-7 U4-4 U5-3)
+    )
+    (net SPI_MOSI
+      (pins U1-5 U3-8 J1-8 U4-5 U5-4)
+    )
+    (net SPI_MISO
+      (pins J2-1 U4-6 U5-5)
+    )
+    (net GPS_TX
+      (pins U7-4 J2-2)
+    )
+    (net FZ_GPIO1
+      (pins U2-4 J2-3)
+    )
+    (net FZ_GPIO2
+      (pins U2-5 J2-4)
+    )
+    (net FZ_GPIO3
+      (pins U2-6 J2-5)
+    )
+    (net FZ_GPIO4
+      (pins U2-7 J2-6)
+    )
+    (net FZ_GPIO5
+      (pins U2-8 J2-7)
+    )
+    (net EN
+      (pins U1-3 U3-3 J2-8)
+    )
+    (net NRF24_IRQ
+      (pins U2-1 U5-8)
+    )
+    (net KBD_RST
+      (pins U2-2 U6-4)
+    )
+    (net KBD_INT
+      (pins U2-3 U6-1)
+    )
+    (net +3V3_RF
+      (pins U3-1 U4-1 U5-1)
+    )
+    (net LORA_BUSY
+      (pins U3-4)
+    )
+    (net LORA_DIO1
+      (pins U3-5)
+    )
+    (net LORA_CS
+      (pins U3-6)
+    )
+    (net CC1101_CS
+      (pins U4-3)
+    )
+    (net CC1101_GDO0
+      (pins U4-7)
+    )
+    (net NRF24_CS
+      (pins U5-6)
+    )
+    (net NRF24_CE
+      (pins U5-7)
+    )
+    (net +3V3_KBD
+      (pins U6-6)
+    )
+    (net GPS_PPS
+      (pins U7-5)
+    )
+    (class kicad_default +3V3_IO +3V3_KBD +3V3_RF +5V_SYS CC1101_CS CC1101_GDO0
+      EN FZ_GPIO1 FZ_GPIO2 FZ_GPIO3 FZ_GPIO4 FZ_GPIO5 GND GPS_PPS GPS_RX GPS_TX
+      I2C_SCL I2C_SDA KBD_INT KBD_RST LORA_BUSY LORA_CS LORA_DIO1 NRF24_CE
+      NRF24_CS NRF24_IRQ SPI_MISO SPI_MOSI SPI_SCK
+      (circuit
+        (use_via "Via[0-1]_600:300_um")
+      )
+      (rule
+        (width 200)
+        (clearance 200)
+      )
+    )
+  )
+  (wiring
+  )
+)

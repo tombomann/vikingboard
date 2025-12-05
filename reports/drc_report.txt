@@ -1,0 +1,173 @@
+** Drc report for Vikingboard.kicad_pcb **
+** Created on 2025-12-05T05:14:23+0100 **
+
+** Found 1 DRC violations **
+[invalid_outline]: Board has malformed outline (no edges found on Edge.Cuts layer)
+    Local override; error
+    @(0.0000 mm, 0.0000 mm): PCB
+
+** Found 40 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(50.2300 mm, 69.8400 mm): PTH pad 1 [+5V_SYS] of J1
+    @(59.4100 mm, 69.8400 mm): PTH pad 1 [+5V_SYS] of U1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(50.2300 mm, 72.3800 mm): PTH pad 2 [+3V3_IO] of J1
+    @(77.7700 mm, 69.8400 mm): PTH pad 1 [+3V3_IO] of U7
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(59.4100 mm, 72.3800 mm): PTH pad 2 [GND] of U1
+    @(50.2300 mm, 74.9200 mm): PTH pad 3 [GND] of J1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(64.0000 mm, 72.3800 mm): PTH pad 2 [GND] of U3
+    @(59.4100 mm, 72.3800 mm): PTH pad 2 [GND] of U1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(68.5900 mm, 72.3800 mm): PTH pad 2 [GND] of U4
+    @(64.0000 mm, 72.3800 mm): PTH pad 2 [GND] of U3
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(68.5900 mm, 72.3800 mm): PTH pad 2 [GND] of U4
+    @(73.1800 mm, 80.0000 mm): PTH pad 5 [GND] of U6
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(68.5900 mm, 87.6200 mm): PTH pad 8 [GND] of U4
+    @(73.1800 mm, 87.6200 mm): PTH pad 8 [GND] of U6
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(73.1800 mm, 85.0800 mm): PTH pad 7 [GND] of U6
+    @(73.1800 mm, 80.0000 mm): PTH pad 5 [GND] of U6
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(73.1800 mm, 87.6200 mm): PTH pad 8 [GND] of U6
+    @(73.1800 mm, 85.0800 mm): PTH pad 7 [GND] of U6
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(73.1800 mm, 87.6200 mm): PTH pad 8 [GND] of U6
+    @(77.7700 mm, 87.6200 mm): PTH pad 8 [GND] of U7
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(77.7700 mm, 72.3800 mm): PTH pad 2 [GND] of U7
+    @(73.1800 mm, 80.0000 mm): PTH pad 5 [GND] of U6
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(77.7700 mm, 85.0800 mm): PTH pad 7 [GND] of U7
+    @(77.7700 mm, 87.6200 mm): PTH pad 8 [GND] of U7
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(77.7700 mm, 85.0800 mm): PTH pad 7 [GND] of U7
+    @(77.7700 mm, 82.5400 mm): PTH pad 6 [GND] of U7
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(77.7700 mm, 87.6200 mm): PTH pad 8 [GND] of U7
+    @(126.0000 mm, 93.3000 mm): PTH pad 2 [GND] of U5
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(50.2300 mm, 77.4600 mm): PTH pad 4 [GPS_RX] of J1
+    @(77.7700 mm, 74.9200 mm): PTH pad 3 [GPS_RX] of U7
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(50.2300 mm, 80.0000 mm): PTH pad 5 [I2C_SCL] of J1
+    @(73.1800 mm, 72.3800 mm): PTH pad 2 [I2C_SCL] of U6
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(50.2300 mm, 82.5400 mm): PTH pad 6 [I2C_SDA] of J1
+    @(73.1800 mm, 74.9200 mm): PTH pad 3 [I2C_SDA] of U6
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(59.4100 mm, 77.4600 mm): PTH pad 4 [SPI_SCK] of U1
+    @(64.0000 mm, 85.0800 mm): PTH pad 7 [SPI_SCK] of U3
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(59.4100 mm, 77.4600 mm): PTH pad 4 [SPI_SCK] of U1
+    @(50.2300 mm, 85.0800 mm): PTH pad 7 [SPI_SCK] of J1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(64.0000 mm, 85.0800 mm): PTH pad 7 [SPI_SCK] of U3
+    @(68.5900 mm, 77.4600 mm): PTH pad 4 [SPI_SCK] of U4
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0000 mm, 95.8400 mm): PTH pad 3 [SPI_SCK] of U5
+    @(68.5900 mm, 77.4600 mm): PTH pad 4 [SPI_SCK] of U4
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(59.4100 mm, 80.0000 mm): PTH pad 5 [SPI_MOSI] of U1
+    @(64.0000 mm, 87.6200 mm): PTH pad 8 [SPI_MOSI] of U3
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(59.4100 mm, 80.0000 mm): PTH pad 5 [SPI_MOSI] of U1
+    @(50.2300 mm, 87.6200 mm): PTH pad 8 [SPI_MOSI] of J1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(64.0000 mm, 87.6200 mm): PTH pad 8 [SPI_MOSI] of U3
+    @(68.5900 mm, 80.0000 mm): PTH pad 5 [SPI_MOSI] of U4
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0000 mm, 98.3800 mm): PTH pad 4 [SPI_MOSI] of U5
+    @(68.5900 mm, 80.0000 mm): PTH pad 5 [SPI_MOSI] of U4
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.8200 mm, 69.8400 mm): PTH pad 1 [SPI_MISO] of J2
+    @(68.5900 mm, 82.5400 mm): PTH pad 6 [SPI_MISO] of U4
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(68.5900 mm, 82.5400 mm): PTH pad 6 [SPI_MISO] of U4
+    @(126.0000 mm, 100.9200 mm): PTH pad 5 [SPI_MISO] of U5
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.8200 mm, 72.3800 mm): PTH pad 2 [GPS_TX] of J2
+    @(77.7700 mm, 77.4600 mm): PTH pad 4 [GPS_TX] of U7
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.8200 mm, 74.9200 mm): PTH pad 3 [FZ_GPIO1] of J2
+    @(111.0000 mm, 98.4200 mm): PTH pad 4 [FZ_GPIO1] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.8200 mm, 77.4600 mm): PTH pad 4 [FZ_GPIO2] of J2
+    @(111.0000 mm, 100.9600 mm): PTH pad 5 [FZ_GPIO2] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.8200 mm, 80.0000 mm): PTH pad 5 [FZ_GPIO3] of J2
+    @(111.0000 mm, 103.5000 mm): PTH pad 6 [FZ_GPIO3] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.8200 mm, 82.5400 mm): PTH pad 6 [FZ_GPIO4] of J2
+    @(111.0000 mm, 106.0400 mm): PTH pad 7 [FZ_GPIO4] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(54.8200 mm, 85.0800 mm): PTH pad 7 [FZ_GPIO5] of J2
+    @(111.0000 mm, 108.5800 mm): PTH pad 8 [FZ_GPIO5] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(59.4100 mm, 74.9200 mm): PTH pad 3 [EN] of U1
+    @(54.8200 mm, 87.6200 mm): PTH pad 8 [EN] of J2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(64.0000 mm, 74.9200 mm): PTH pad 3 [EN] of U3
+    @(59.4100 mm, 74.9200 mm): PTH pad 3 [EN] of U1
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.0000 mm, 90.8000 mm): PTH pad 1 [NRF24_IRQ] of U2
+    @(126.0000 mm, 108.5400 mm): PTH pad 8 [NRF24_IRQ] of U5
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(73.1800 mm, 77.4600 mm): PTH pad 4 [KBD_RST] of U6
+    @(111.0000 mm, 93.3400 mm): PTH pad 2 [KBD_RST] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(73.1800 mm, 69.8400 mm): PTH pad 1 [KBD_INT] of U6
+    @(111.0000 mm, 95.8800 mm): PTH pad 3 [KBD_INT] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(68.5900 mm, 69.8400 mm): PTH pad 1 [+3V3_RF] of U4
+    @(64.0000 mm, 69.8400 mm): PTH pad 1 [+3V3_RF] of U3
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0000 mm, 90.7600 mm): PTH pad 1 [+3V3_RF] of U5
+    @(68.5900 mm, 69.8400 mm): PTH pad 1 [+3V3_RF] of U4
+
+** Found 0 Footprint errors **
+
+** End of Report **

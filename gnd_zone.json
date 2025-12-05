@@ -1,0 +1,9 @@
+{
+  "layer": "B.Cu",
+  "net": "GND",
+  "clearance": 0.2,
+  "min_thickness": 0.25,
+  "pad_connection": "thermal_relief",
+  "thermal_gap": 0.2,
+  "thermal_spoke_width": 0.3
+}

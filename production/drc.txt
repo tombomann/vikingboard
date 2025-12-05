@@ -1,0 +1,14 @@
+** Drc report for Vikingboard.kicad_pcb **
+** Created on 2025-12-05T12:14:06+0100 **
+
+** Found 0 DRC violations **
+
+** Found 1 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(45.0000 mm, 65.0000 mm): Zone [GND] on B.Cu, priority 0
+    @(45.0000 mm, 65.0000 mm): Zone [GND] on B.Cu, priority 0
+
+** Found 0 Footprint errors **
+
+** End of Report **

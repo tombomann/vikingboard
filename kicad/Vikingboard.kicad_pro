@@ -489,7 +489,7 @@
       "netlist": "",
       "plot": "",
       "pos_files": "",
-      "specctra_dsn": "",
+      "specctra_dsn": "Vikingboard123.dsn",
       "step": "",
       "svg": "",
       "vrml": ""
@@ -611,7 +611,7 @@
   },
   "sheets": [
     [
-      "4c4c34be-f125-401d-8dbc-db062dc9afad",
+      "8b53bba8-3239-41da-b11b-62819c6e4b04",
       "Root"
     ]
   ],

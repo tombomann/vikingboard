@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "VIKINGBOARD - GND PLANE SETUP"
+echo "=============================="
+echo ""
+echo "Åpne KiCad og kjør scriptet:"
+echo "1. open -a KiCad kicad/Vikingboard.kicad_pro"
+echo "2. Tools → Scripting Console"
+echo "3. Kjør add_gnd_plane.py"
+echo ""
+echo "Script plassering: $(pwd)/add_gnd_plane.py"
