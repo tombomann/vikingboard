@@ -1,0 +1,15 @@
+### Footprint positions - created on 2025-12-05T03:52:05+0100 ###
+### Printed by KiCad version 9.0.6
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val                           Package                               PosX       PosY       Rot  Side
+J1        Conn_02x09_Odd_Even           PinHeader_1x08_P2.54mm_Vertical    50.2300   -69.8400    0.0000  top
+J2        Conn_02x18_Odd_Even           PinHeader_1x08_P2.54mm_Vertical    54.8200   -69.8400    0.0000  top
+U1        Conn_01x05                    PinHeader_1x08_P2.54mm_Vertical    59.4100   -69.8400    0.0000  top
+U2        DRV2605LDGS                   PinHeader_1x08_P2.54mm_Vertical   111.0000   -90.8000    0.0000  top
+U3        PAL24                         PinHeader_1x08_P2.54mm_Vertical    64.0000   -69.8400    0.0000  top
+U4        Q_Triac                       PinHeader_1x08_P2.54mm_Vertical    68.5900   -69.8400    0.0000  top
+U5        SX1276                        PinHeader_1x08_P2.54mm_Vertical   126.0000   -90.7600    0.0000  top
+U6        Conn_02x04_Odd_Even_Shielded  PinHeader_1x08_P2.54mm_Vertical    73.1800   -69.8400    0.0000  top
+U7        Conn_01x08_Shielded           PinHeader_1x08_P2.54mm_Vertical    77.7700   -69.8400    0.0000  top
+## End
