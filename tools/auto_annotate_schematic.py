@@ -1,4 +1,3 @@
-import subprocess
 import csv
 from pathlib import Path
 
@@ -22,60 +21,75 @@ LCSC_MAP = {
 }
 
 def annotate_and_generate_bom():
-    # 1. Eksporter BOM via KiCad CLI
-    sch_path = "kicad/Vikingboard.kicad_sch"
+    """Generer JLCPCB BOM fra eksisterende production/bom.csv"""
     
-    result = subprocess.run([
-        "kicad-cli", "sch", "export", "python-bom",
-        "--output", "production/bom_raw.xml",
-        sch_path
-    ], capture_output=True, text=True)
-    
-    if result.returncode != 0:
-        print("⚠️  KiCad CLI feilet - bruker eksisterende production/bom.csv")
-        bom_path = Path("production/bom.csv")
-    else:
-        print("✅ BOM eksportert fra schematic")
-        # Parse XML (fallback til CSV hvis XML feiler)
-        bom_path = Path("production/bom.csv")
-    
-    # 2. Les eksisterende CSV BOM
+    # 1. Les production/bom.csv (generert av MASTER.sh)
+    bom_path = Path("production/bom.csv")
     if not bom_path.exists():
-        print("❌ production/bom.csv mangler")
+        # Prøv production_output/ (KiKit output)
+        bom_path = Path("production_output/vikingboard_bom.csv")
+    
+    if not bom_path.exists():
+        print("❌ Ingen BOM funnet - kjør ./MASTER.sh først")
         return False
+    
+    print(f"📋 Leser BOM fra {bom_path}")
     
     with open(bom_path) as f:
         reader = csv.DictReader(f)
         rows = list(reader)
     
-    # 3. Match LCSC-koder
+    # 2. Match LCSC-koder
     components = []
     for row in rows:
-        value = row["Value"]
-        lcsc = next((code for key, code in LCSC_MAP.items() 
-                    if key.lower() in value.lower()), "MANUAL")
+        value = row.get("Value", row.get("value", ""))  # Handle både formater
+        refs = row.get("Refs", row.get("ref", row.get("Id", "")))
+        footprint = row.get("Footprint", row.get("footprint", ""))
+        
+        # Match LCSC
+        lcsc = "MANUAL"
+        for key, code in LCSC_MAP.items():
+            if key.lower() in value.lower():
+                lcsc = code
+                break
         
         components.append({
             "Comment": value,
-            "Designator": row["Refs"],
-            "Footprint": row["Footprint"],
+            "Designator": refs,
+            "Footprint": footprint,
             "LCSC Part #": lcsc
         })
     
-    # 4. Skriv JLCPCB-format BOM
-    with open("manufacturing/BOM_JLCPCB.csv", 'w', newline='') as f:
+    # 3. Skriv JLCPCB-format BOM
+    Path("manufacturing").mkdir(exist_ok=True)
+    output_path = Path("manufacturing/BOM_JLCPCB.csv")
+    
+    with open(output_path, 'w', newline='') as f:
         writer = csv.DictWriter(f, ["Comment", "Designator", "Footprint", "LCSC Part #"])
         writer.writeheader()
         writer.writerows(components)
     
     print(f"✅ {len(components)} komponenter annotert med LCSC-koder")
+    print(f"📄 Output: {output_path}")
+    
+    # 4. Vis oppsummering
+    lcsc_matched = sum(1 for c in components if c["LCSC Part #"] != "MANUAL")
+    manual_needed = len(components) - lcsc_matched
+    
+    print(f"   ✓ {lcsc_matched} med LCSC-kode")
+    if manual_needed > 0:
+        print(f"   ⚠️  {manual_needed} trenger manuell LCSC-kode")
+        manual_comps = [c["Comment"] for c in components if c["LCSC Part #"] == "MANUAL"]
+        print(f"      Mangler: {', '.join(manual_comps[:3])}...")
     
     # 5. Valider kritiske komponenter
     critical = ["ESP32-S3", "CC1101", "SX1262", "NRF24"]
-    missing = [c for c in critical if not any(c in comp["Comment"] for comp in components)]
+    found = [c for c in critical if any(c in comp["Comment"] for comp in components)]
+    missing = [c for c in critical if c not in found]
+    
     if missing:
-        print(f"⚠️  Mangler: {missing}")
-        print("   (OK for nå - disse må legges til i KiCad schematic)")
+        print(f"⚠️  Kritiske komponenter mangler i BOM: {missing}")
+        print("   → Legg til i KiCad schematic og kjør ./MASTER.sh igjen")
     
     return True
 
